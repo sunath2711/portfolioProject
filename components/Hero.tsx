@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import GradientBackground from "./GradientBackground";
 import SideNav from "./SideNav";
+import UfoNav from "./UfoNav";
 
 export default function Hero() {
   return (
@@ -10,15 +11,14 @@ export default function Hero() {
       {/* Animated Gradient Background */}
       <GradientBackground />
 
-      {/* Side Navigation (AI-style peripheral nav) */}
-      <SideNav />
+      <UfoNav />
 
       {/* Hero Content */}
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, ease: "easeOut" }}
-        className="relative z-10 mx-auto max-w-3xl text-center"
+        className="relative z-30 mx-auto max-w-3xl text-center"
       >
         {/* Headline */}
         <h1 className="text-4xl font-medium leading-tight text-white md:text-6xl">
