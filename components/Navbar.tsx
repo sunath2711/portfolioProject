@@ -12,17 +12,28 @@ export default function Navbar() {
             Sunath<span className="text-violet-400">.</span>
           </Link>
 
-          <nav className="flex items-center gap-6 text-sm text-gray-300">
-            <Link href="/about" className="hover:text-white transition">
-              About
-            </Link>
-            <Link href="/projects" className="hover:text-white transition">
-              Projects
-            </Link>
-            <Link href="/contact" className="hover:text-white transition">
-              Contact
-            </Link>
-          </nav>
+                        <nav className="flex items-center gap-6 text-sm text-gray-300">
+                <Link href="#about" className="hover:text-white transition">
+                    About
+                </Link>
+                <Link href="#education" className="hover:text-white transition">
+                    Education
+                </Link>
+                <Link href="#projects" className="hover:text-white transition">
+                    Projects
+                </Link>
+                <Link href="#contact" className="hover:text-white transition">
+                    Contact
+                </Link>
+
+                <a
+                    href="/resume.pdf"
+                    className="rounded-lg border border-white/20 px-3 py-1 text-white hover:bg-white/10 transition"
+                >
+                    Resume
+                </a>
+                </nav>
+
         </div>
       </div>
     </header>
