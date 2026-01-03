@@ -11,47 +11,91 @@ export default function UFOItem({ label, onClick }: UFOItemProps) {
   return (
     <motion.button
       onClick={onClick}
-      whileHover={{ scale: 1.08 }}
+      whileHover={{ scale: 1.04 }}
       className="relative flex flex-col items-center focus:outline-none"
+      style={{ transform: "scale(0.8)" }} // 🔹 20% size reduction
     >
-      {/* UFO BODY */}
-      <div className="relative h-16 w-44">
-        {/* Dome */}
-        <div className="absolute left-1/2 top-0 h-6 w-16 -translate-x-1/2 rounded-t-full bg-gradient-to-b from-zinc-400 to-zinc-700 opacity-90 blur-[0.3px]" />
-
-        {/* Saucer */}
-        <div className="absolute inset-x-0 top-4 h-10 rounded-full bg-gradient-to-b from-zinc-200 via-zinc-100 to-zinc-300 shadow-[0_18px_35px_rgba(0,0,0,0.7)]" />
-
-        {/* Neon ring */}
-        <div className="absolute inset-x-3 top-[28px] h-1 rounded-full bg-cyan-400 shadow-[0_0_18px_rgba(34,211,238,1)]" />
-
-        {/* Neon dots */}
-        <div className="absolute inset-x-6 bottom-3 flex justify-between">
-          {[0, 1, 2, 3, 4].map((i) => (
-            <span
-              key={i}
-              className="h-1.5 w-1.5 rounded-full bg-fuchsia-400 shadow-[0_0_10px_rgba(217,70,239,1)] animate-pulse"
-              style={{ animationDelay: `${i * 120}ms` }}
-            />
-          ))}
-        </div>
-      </div>
-
-      {/* TRACTOR BEAM */}
-      <div className="pointer-events-none absolute top-[60px] h-40 w-32 origin-top scale-y-0 transition-transform duration-300 group-hover:scale-y-100">
+      <div className="relative flex h-[250px] w-[200px] flex-col items-center">
+        {/* Glass Dome */}
         <div
-          className="h-full w-full bg-gradient-to-b from-cyan-300/40 to-transparent"
+          className="relative z-20 h-[45px] w-[70px] rounded-t-full border border-white/30"
           style={{
-            clipPath: "polygon(50% 0%, 62% 0%, 100% 100%, 0% 100%, 38% 0%)",
+            background: "rgba(135,206,250,0.2)",
+            backdropFilter: "blur(5px)",
+            boxShadow:
+              "inset 0 10px 15px rgba(255,255,255,0.4), 0 0 20px rgba(0,255,255,0.5)",
+            marginBottom: "-15px",
+          }}
+        />
+
+        {/* Saucer Body */}
+        <div
+          className="relative z-30 h-[60px] w-[200px] rounded-full"
+          style={{
+            background: "linear-gradient(to bottom, #444, #222, #000)",
+            boxShadow:
+              "inset 0 2px 5px rgba(255,255,255,0.2), 0 10px 20px rgba(0,0,0,0.8)",
+            borderBottom: "2px solid #111",
+          }}
+        >
+          <div
+            className="absolute left-1/2 top-1/2 h-[30px] w-[170px] -translate-x-1/2 -translate-y-1/2 rounded-full"
+            style={{
+              border: "2px solid #00f3ff",
+              boxShadow:
+                "0 0 15px #00f3ff, inset 0 0 10px #00f3ff",
+            }}
+          />
+
+          <div
+            className="absolute inset-0 rounded-full"
+            style={{
+              backgroundImage:
+                "radial-gradient(circle, #ff00ff 2px, transparent 4px)",
+              backgroundSize: "25px 50px",
+              backgroundPosition: "center",
+              animation: "ufoPulse 1.5s infinite",
+            }}
+          />
+        </div>
+
+        <div
+          className="z-40 mt-[-2px] h-[15px] w-[50px] rounded-full"
+          style={{
+            background: "#fff",
+            filter: "blur(5px)",
+            boxShadow: "0 0 20px #00f3ff",
+          }}
+        />
+
+        <div
+          className="pointer-events-none mt-[-10px] h-[140px] w-[140px]"
+          style={{
+            background:
+              "linear-gradient(to bottom, rgba(0,243,255,0.5), rgba(0,243,255,0.05))",
+            clipPath:
+              "polygon(40% 0%, 60% 0%, 100% 100%, 0% 100%)",
           }}
         />
       </div>
 
-      {/* LABEL */}
-      <span className="mt-3 text-xs tracking-widest text-white/70">
+      <span className="mt-2 text-xs tracking-widest text-white/70">
         {label}
       </span>
+
+      <style jsx>{`
+        @keyframes ufoPulse {
+          0%,
+          100% {
+            opacity: 1;
+            filter: drop-shadow(0 0 5px #ff00ff);
+          }
+          50% {
+            opacity: 0.35;
+            filter: drop-shadow(0 0 2px #ff00ff);
+          }
+        }
+      `}</style>
     </motion.button>
   );
 }
-
