@@ -11,10 +11,13 @@ export default function UFOItem({ label, onClick }: UFOItemProps) {
   return (
     <motion.button
       onClick={onClick}
-      whileHover={{ scale: 1.04 }}
-      className="relative flex flex-col items-center focus:outline-none"
-      style={{ transform: "scale(0.8)" }} // 🔹 20% size reduction
+      initial={{ scale: 0.8 }}
+      animate={{ scale: 0.8 }}
+      whileHover={{ scale: 0.86 }} // 🔹 subtle highlight only
+      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+      className="group relative flex flex-col items-center focus:outline-none"
     >
+      {/* UFO WRAPPER */}
       <div className="relative flex h-[250px] w-[200px] flex-col items-center">
         {/* Glass Dome */}
         <div
@@ -23,14 +26,14 @@ export default function UFOItem({ label, onClick }: UFOItemProps) {
             background: "rgba(135,206,250,0.2)",
             backdropFilter: "blur(5px)",
             boxShadow:
-              "inset 0 10px 15px rgba(255,255,255,0.4), 0 0 20px rgba(0,255,255,0.5)",
+              "inset 0 10px 15px rgba(255,255,255,0.4), 0 0 20px rgba(0,255,255,0.4)",
             marginBottom: "-15px",
           }}
         />
 
         {/* Saucer Body */}
         <div
-          className="relative z-30 h-[60px] w-[200px] rounded-full"
+          className="relative z-30 h-[60px] w-[200px] rounded-full transition-all duration-300"
           style={{
             background: "linear-gradient(to bottom, #444, #222, #000)",
             boxShadow:
@@ -38,15 +41,17 @@ export default function UFOItem({ label, onClick }: UFOItemProps) {
             borderBottom: "2px solid #111",
           }}
         >
+          {/* Neon Ring */}
           <div
-            className="absolute left-1/2 top-1/2 h-[30px] w-[170px] -translate-x-1/2 -translate-y-1/2 rounded-full"
+            className="absolute left-1/2 top-1/2 h-[30px] w-[170px] -translate-x-1/2 -translate-y-1/2 rounded-full transition-all duration-300 group-hover:opacity-100"
             style={{
               border: "2px solid #00f3ff",
               boxShadow:
-                "0 0 15px #00f3ff, inset 0 0 10px #00f3ff",
+                "0 0 12px #00f3ff, inset 0 0 8px #00f3ff",
             }}
           />
 
+          {/* Windows */}
           <div
             className="absolute inset-0 rounded-full"
             style={{
@@ -59,17 +64,19 @@ export default function UFOItem({ label, onClick }: UFOItemProps) {
           />
         </div>
 
+        {/* Bottom Glow */}
         <div
-          className="z-40 mt-[-2px] h-[15px] w-[50px] rounded-full"
+          className="z-40 mt-[-2px] h-[15px] w-[50px] rounded-full transition-all duration-300 group-hover:shadow-[0_0_35px_#00f3ff]"
           style={{
             background: "#fff",
             filter: "blur(5px)",
-            boxShadow: "0 0 20px #00f3ff",
+            boxShadow: "0 0 18px #00f3ff",
           }}
         />
 
+        {/* Tractor Beam */}
         <div
-          className="pointer-events-none mt-[-10px] h-[140px] w-[140px]"
+          className="pointer-events-none mt-[-10px] h-[140px] w-[140px] opacity-20 transition-all duration-300 group-hover:opacity-60"
           style={{
             background:
               "linear-gradient(to bottom, rgba(0,243,255,0.5), rgba(0,243,255,0.05))",
@@ -79,16 +86,27 @@ export default function UFOItem({ label, onClick }: UFOItemProps) {
         />
       </div>
 
-      <span className="mt-2 text-xs tracking-widest text-white/70">
-        {label}
-      </span>
+      {/* LABEL (hover only) */}
+      <motion.span
+        initial={{ opacity: 0, y: -4 }}
+        whileHover={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.2 }}
+        className="pointer-events-none mt-2 text-xs tracking-[0.35em] text-cyan-300"
+        style={{
+          fontFamily:
+            "'Orbitron', 'Rajdhani', 'Space Grotesk', sans-serif",
+        }}
+      >
+        {label.toUpperCase()}
+      </motion.span>
 
+      {/* Keyframes */}
       <style jsx>{`
         @keyframes ufoPulse {
           0%,
           100% {
             opacity: 1;
-            filter: drop-shadow(0 0 5px #ff00ff);
+            filter: drop-shadow(0 0 4px #ff00ff);
           }
           50% {
             opacity: 0.35;
