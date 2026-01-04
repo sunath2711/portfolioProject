@@ -13,8 +13,9 @@ export default function UFOItem({ label, onClick }: UFOItemProps) {
       onClick={onClick}
       initial={{ scale: 0.8 }}
       animate={{ scale: 0.8 }}
-      whileHover={{ scale: 0.86 }} // 🔹 subtle highlight only
+      whileHover={{ scale: 0.86 }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
+      // 'group' class allows the child span to react when the button is hovered
       className="group relative flex flex-col items-center focus:outline-none"
     >
       {/* UFO WRAPPER */}
@@ -43,11 +44,10 @@ export default function UFOItem({ label, onClick }: UFOItemProps) {
         >
           {/* Neon Ring */}
           <div
-            className="absolute left-1/2 top-1/2 h-[30px] w-[170px] -translate-x-1/2 -translate-y-1/2 rounded-full transition-all duration-300 group-hover:opacity-100"
+            className="absolute left-1/2 top-1/2 h-[30px] w-[170px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-50 transition-all duration-300 group-hover:opacity-100"
             style={{
               border: "2px solid #00f3ff",
-              boxShadow:
-                "0 0 12px #00f3ff, inset 0 0 8px #00f3ff",
+              boxShadow: "0 0 12px #00f3ff, inset 0 0 8px #00f3ff",
             }}
           />
 
@@ -80,31 +80,27 @@ export default function UFOItem({ label, onClick }: UFOItemProps) {
           style={{
             background:
               "linear-gradient(to bottom, rgba(0,243,255,0.5), rgba(0,243,255,0.05))",
-            clipPath:
-              "polygon(40% 0%, 60% 0%, 100% 100%, 0% 100%)",
+            clipPath: "polygon(40% 0%, 60% 0%, 100% 100%, 0% 100%)",
           }}
         />
       </div>
 
-      {/* LABEL (hover only) */}
+      {/* LABEL - Fixed Visibility */}
       <motion.span
-        initial={{ opacity: 0, y: -4 }}
-        whileHover={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.2 }}
-        className="pointer-events-none mt-2 text-xs tracking-[0.35em] text-cyan-300"
+        // Changed initial to 0.7 so it's visible but slightly dimmed until hover
+        initial={{ opacity: 0.7, y: 0 }}
+        // Now reacts to the button's hover state via the 'group' class
+        className="pointer-events-none mt-4 text-xs tracking-[0.35em] text-cyan-300 transition-all duration-300 group-hover:opacity-100 group-hover:text-white group-hover:drop-shadow-[0_0_8px_rgba(0,243,255,0.8)]"
         style={{
-          fontFamily:
-            "'Orbitron', 'Rajdhani', 'Space Grotesk', sans-serif",
+          fontFamily: "'Orbitron', 'Rajdhani', 'Space Grotesk', sans-serif",
         }}
       >
         {label.toUpperCase()}
       </motion.span>
 
-      {/* Keyframes */}
       <style jsx>{`
         @keyframes ufoPulse {
-          0%,
-          100% {
+          0%, 100% {
             opacity: 1;
             filter: drop-shadow(0 0 4px #ff00ff);
           }
