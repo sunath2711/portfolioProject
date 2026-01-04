@@ -15,11 +15,10 @@ export default function UFOItem({ label, onClick }: UFOItemProps) {
       animate={{ scale: 0.8 }}
       whileHover={{ scale: 0.86 }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
-      // 'group' class allows the child span to react when the button is hovered
       className="group relative flex flex-col items-center focus:outline-none"
     >
       {/* UFO WRAPPER */}
-      <div className="relative flex h-[250px] w-[200px] flex-col items-center">
+      <div className="relative flex h-[220px] w-[200px] flex-col items-center">
         {/* Glass Dome */}
         <div
           className="relative z-20 h-[30px] w-[120px] rounded-t-full border border-white/30"
@@ -44,11 +43,7 @@ export default function UFOItem({ label, onClick }: UFOItemProps) {
         >
           {/* Neon Ring */}
           <div
-            className="absolute left-1/2 top-1/2 h-[30px] w-[170px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-50 transition-all duration-300 group-hover:opacity-100"
-            style={{
-              border: "2px solid #00f3ff",
-              boxShadow: "0 0 12px #00f3ff, inset 0 0 8px #00f3ff",
-            }}
+            className="absolute left-1/2 top-1/2 h-[30px] w-[170px] -translate-x-1/2 -translate-y-1/2 rounded-full transition-all duration-300 border-2 border-cyan-400/30 group-hover:border-cyan-400 group-hover:shadow-[0_0_15px_#00f3ff]"
           />
 
           {/* Windows */}
@@ -76,27 +71,35 @@ export default function UFOItem({ label, onClick }: UFOItemProps) {
 
         {/* Tractor Beam */}
         <div
-          className="pointer-events-none mt-[-10px] h-[140px] w-[140px] opacity-20 transition-all duration-300 group-hover:opacity-60"
+          className="pointer-events-none mt-[-10px] h-[120px] w-[140px] opacity-20 transition-all duration-300 group-hover:opacity-40"
           style={{
             background:
-              "linear-gradient(to bottom, rgba(0,243,255,0.5), rgba(0,243,255,0.05))",
-            clipPath: "polygon(40% 0%, 60% 0%, 100% 100%, 0% 100%)",
+              "linear-gradient(to bottom, rgba(0,243,255,0.5), rgba(0,243,255,0))",
+            clipPath:
+              "polygon(40% 0%, 60% 0%, 100% 100%, 0% 100%)",
           }}
         />
       </div>
 
-      {/* LABEL - Fixed Visibility */}
-      <motion.span
-        // Changed initial to 0.7 so it's visible but slightly dimmed until hover
-        initial={{ opacity: 0.7, y: 0 }}
-        // Now reacts to the button's hover state via the 'group' class
-        className="pointer-events-none mt-4 text-xs tracking-[0.35em] text-cyan-300 transition-all duration-300 group-hover:opacity-100 group-hover:text-white group-hover:drop-shadow-[0_0_8px_rgba(0,243,255,0.8)]"
-        style={{
-          fontFamily: "'Orbitron', 'Rajdhani', 'Space Grotesk', sans-serif",
-        }}
-      >
-        {label.toUpperCase()}
-      </motion.span>
+      {/* FUTURISTIC HUD LABEL */}
+      <div className="relative mt-2">
+        {/* Left Bracket */}
+        <div className="absolute -left-4 -top-1 bottom-1 w-2 border-l border-t border-b border-cyan-500/40 transition-all group-hover:border-cyan-300" />
+        {/* Right Bracket */}
+        <div className="absolute -right-4 -top-1 bottom-1 w-2 border-r border-t border-b border-cyan-500/40 transition-all group-hover:border-cyan-300" />
+        
+        <motion.span
+          className="block px-2 text-[10px] font-bold tracking-[0.4em] text-cyan-400 drop-shadow-[0_0_5px_rgba(0,243,255,0.5)] transition-all group-hover:text-white group-hover:drop-shadow-[0_0_10px_#00f3ff]"
+          style={{
+            fontFamily: "'Orbitron', sans-serif",
+          }}
+        >
+          {label.toUpperCase()}
+        </motion.span>
+        
+        {/* HUD underline animation */}
+        <div className="mx-auto mt-1 h-[1px] w-0 bg-cyan-400 opacity-50 transition-all duration-500 group-hover:w-full" />
+      </div>
 
       <style jsx>{`
         @keyframes ufoPulse {

@@ -35,18 +35,15 @@ function OrbitingUFO({
 }) {
   const angle = useMotionValue(TOP_OF_ORBIT_ANGLE);
 
-  // FIX 1: x and y are now direct MotionValues so they can be animated 
-  // freely in Phase 1 and 3 without being "locked" by the orbit math.
+  // x and y are independent to allow Phase 1 and 3 to move freely
   const x = useMotionValue(OFFSCREEN_LEFT_X);
   const y = useMotionValue(-ORBIT_RADIUS + ORBIT_Y_OFFSET);
 
-  // The mathematical orbit paths
+  // Orbit mathematical derivatives
   const orbitX = useTransform(angle, (a) => Math.cos(a) * ORBIT_RADIUS);
   const orbitY = useTransform(angle, (a) => Math.sin(a) * ORBIT_RADIUS + ORBIT_Y_OFFSET);
 
   useEffect(() => {
-    // FIX 2: This 'active' flag prevents the "1 UFO" glitch caused by React Strict Mode 
-    // trying to run the animation twice at the same time on startup.
     let active = true;
 
     async function sequence() {
@@ -60,7 +57,7 @@ function OrbitingUFO({
       if (!active) return;
 
       /* -------- Phase 2: Full 360 ORBIT -------- */
-      // FIX 3: We temporarily link x and y to the orbit math during this phase.
+      // Bind x and y to follow the orbit math
       const unbindX = orbitX.on("change", (v) => x.set(v));
       const unbindY = orbitY.on("change", (v) => y.set(v));
 
@@ -75,18 +72,19 @@ function OrbitingUFO({
       if (!active) return;
 
       /* -------- Phase 3: Diverge to final positions -------- */
+      // Increased spacing to x: 500 and y: 180
       const final =
         index < 2
-          ? { x: -360, y: index === 0 ? -120 : 120 }
-          : { x: 360, y: index === 2 ? -120 : 120 };
+          ? { x: -500, y: index === 0 ? -180 : 180 }
+          : { x: 500, y: index === 2 ? -180 : 180 };
 
       await Promise.all([
         animate(x, final.x, {
-          duration: 1.2,
+          duration: 1.5,
           ease: "easeInOut",
         }).finished,
         animate(y, final.y, {
-          duration: 1.2,
+          duration: 1.5,
           ease: "easeInOut",
         }).finished,
       ]);
@@ -94,7 +92,6 @@ function OrbitingUFO({
 
     sequence();
 
-    // Cleanup: Stops all animations if the component unmounts
     return () => {
       active = false;
       x.stop();
