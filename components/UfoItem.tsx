@@ -21,13 +21,13 @@ export default function UFOItem({ label, onClick }: UFOItemProps) {
       <div className="relative flex h-[250px] w-[200px] flex-col items-center">
         {/* Glass Dome */}
         <div
-          className="relative z-20 h-[45px] w-[70px] rounded-t-full border border-white/30"
+          className="relative z-20 h-[30px] w-[120px] rounded-t-full border border-white/30"
           style={{
             background: "rgba(135,206,250,0.2)",
             backdropFilter: "blur(5px)",
             boxShadow:
               "inset 0 10px 15px rgba(255,255,255,0.4), 0 0 20px rgba(0,255,255,0.4)",
-            marginBottom: "-15px",
+            marginBottom: "-10px",
           }}
         />
 
