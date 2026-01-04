@@ -9,7 +9,13 @@ import {
 import { useEffect } from "react";
 import UFOItem from "./UfoItem";
 
-const labels = ["Education", "Skills", "Projects", "Contact"];
+// UPDATED: navItems now contains the label and the section ID it links to
+const navItems = [
+  { label: "Education", href: "#education" },
+  { label: "Skills", href: "#skills" },
+  { label: "Projects", href: "#projects" },
+  { label: "Contact", href: "#contact" },
+];
 
 const ORBIT_RADIUS = 280;
 const ORBIT_Y_OFFSET = 60; 
@@ -19,8 +25,13 @@ const OFFSCREEN_LEFT_X = -700;
 export default function UfoNav() {
   return (
     <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-      {labels.map((label, index) => (
-        <OrbitingUFO key={label} index={index} label={label} />
+      {navItems.map((item, index) => (
+        <OrbitingUFO 
+          key={item.label} 
+          index={index} 
+          label={item.label} 
+          href={item.href} 
+        />
       ))}
     </div>
   );
@@ -29,13 +40,15 @@ export default function UfoNav() {
 function OrbitingUFO({
   index,
   label,
+  href,
 }: {
   index: number;
   label: string;
+  href: string;
 }) {
   const angle = useMotionValue(TOP_OF_ORBIT_ANGLE);
 
-  // x and y are independent to allow Phase 1 and 3 to move freely
+  // Independent x and y to allow Phase 1 and 3 to move freely
   const x = useMotionValue(OFFSCREEN_LEFT_X);
   const y = useMotionValue(-ORBIT_RADIUS + ORBIT_Y_OFFSET);
 
@@ -43,11 +56,19 @@ function OrbitingUFO({
   const orbitX = useTransform(angle, (a) => Math.cos(a) * ORBIT_RADIUS);
   const orbitY = useTransform(angle, (a) => Math.sin(a) * ORBIT_RADIUS + ORBIT_Y_OFFSET);
 
+  // Smooth scroll handler
+  const handleNavigation = () => {
+    const element = document.querySelector(href);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   useEffect(() => {
     let active = true;
 
     async function sequence() {
-      /* -------- Phase 1: Straight entry from LEFT -------- */
+      /* -------- Phase 1: Entry from LEFT -------- */
       await animate(x, 0, {
         duration: 1,
         delay: index * 0.35,
@@ -57,7 +78,6 @@ function OrbitingUFO({
       if (!active) return;
 
       /* -------- Phase 2: Full 360 ORBIT -------- */
-      // Bind x and y to follow the orbit math
       const unbindX = orbitX.on("change", (v) => x.set(v));
       const unbindY = orbitY.on("change", (v) => y.set(v));
 
@@ -72,7 +92,7 @@ function OrbitingUFO({
       if (!active) return;
 
       /* -------- Phase 3: Diverge to final positions -------- */
-      // Increased spacing to x: 500 and y: 180
+      // Spacious positioning to frame the Hero text
       const final =
         index < 2
           ? { x: -500, y: index === 0 ? -180 : 180 }
@@ -108,7 +128,10 @@ function OrbitingUFO({
       transition={{ delay: index * 0.35 }}
       style={{ x, y }}
     >
-      <UFOItem label={label} />
+      <UFOItem 
+        label={label} 
+        onClick={handleNavigation} 
+      />
     </motion.div>
   );
 }

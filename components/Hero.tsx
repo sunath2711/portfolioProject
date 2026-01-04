@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import GradientBackground from "./GradientBackground";
+import SpaceBackground from "./SpaceBackground";
 import SideNav from "./SideNav";
 import UfoNav from "./UfoNav";
 
@@ -9,7 +10,7 @@ export default function Hero() {
   return (
     <section className="relative flex min-h-screen items-center justify-center px-6 overflow-hidden">
       {/* Animated Gradient Background */}
-      <GradientBackground />
+      <SpaceBackground />
 
       <UfoNav />
 

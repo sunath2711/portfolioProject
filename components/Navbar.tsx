@@ -2,38 +2,39 @@ import Link from "next/link";
 
 export default function Navbar() {
   return (
-    <header className="fixed top-0 left-0 right-0 z-50">
-      <div className="mx-auto max-w-6xl px-6">
-        <div className="mt-4 flex items-center justify-between rounded-2xl border border-white/10 bg-white/5 px-6 py-4 backdrop-blur">
+    <header className="fixed top-0 left-0 right-0 z-50 px-6 pt-4">
+      <div className="mx-auto max-w-6xl">
+        {/* HUD Frame */}
+        <div className="relative flex items-center justify-between border-b border-cyan-500/30 bg-black/40 px-8 py-4 backdrop-blur-md">
+          {/* Decorative Corner Brackets */}
+          <div className="absolute left-0 top-0 h-2 w-2 border-l-2 border-t-2 border-cyan-400" />
+          <div className="absolute right-0 top-0 h-2 w-2 border-r-2 border-t-2 border-cyan-400" />
+
           <Link
             href="/"
-            className="text-sm font-semibold tracking-wide text-white"
+            className="text-lg font-bold tracking-[0.2em] text-white"
+            style={{ fontFamily: "'Orbitron', sans-serif" }}
           >
-            Sunath<span className="text-violet-400">.</span>
+            SUNATH<span className="animate-pulse text-cyan-400">_</span>
           </Link>
 
-                        <nav className="flex items-center gap-6 text-sm text-gray-300">
-                <Link href="#about" className="hover:text-white transition">
-                    About
-                </Link>
-                <Link href="#education" className="hover:text-white transition">
-                    Education
-                </Link>
-                <Link href="#projects" className="hover:text-white transition">
-                    Projects
-                </Link>
-                <Link href="#contact" className="hover:text-white transition">
-                    Contact
-                </Link>
-
-                <a
-                    href="/resume.pdf"
-                    className="rounded-lg border border-white/20 px-3 py-1 text-white hover:bg-white/10 transition"
-                >
-                    Resume
-                </a>
-                </nav>
-
+          <nav className="hidden items-center gap-8 text-[11px] font-medium uppercase tracking-[0.2em] text-cyan-100/70 md:flex">
+            {["About", "Education", "Projects", "Contact"].map((item) => (
+              <Link 
+                key={item} 
+                href={`#${item.toLowerCase()}`} 
+                className="transition-all hover:text-cyan-400 hover:drop-shadow-[0_0_8px_#00f3ff]"
+              >
+                {item}
+              </Link>
+            ))}
+            <a
+              href="/resume.pdf"
+              className="ml-4 border border-cyan-500/50 bg-cyan-500/10 px-4 py-1.5 text-cyan-400 transition-all hover:bg-cyan-500 hover:text-black"
+            >
+              RESUME.EXE
+            </a>
+          </nav>
         </div>
       </div>
     </header>
