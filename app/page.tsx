@@ -1,10 +1,12 @@
 import Hero from "@/components/Hero";
+import Projects from "@/components/Projects";
+import Navbar from "@/components/Navbar";
 
 export default function Home() {
   return (
     <>
       <Hero />
-
+      <Projects />
       <section className="mx-auto max-w-6xl px-6 py-24">
         <div className="grid gap-12 md:grid-cols-3">
           <div>
