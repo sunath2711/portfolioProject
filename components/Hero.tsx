@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import SpaceBackground from "./SpaceBackground";
 import UfoNav from "./UfoNav";
 
+
 export default function Hero() {
   return (
     <section className="relative flex min-h-screen items-center justify-center px-6 overflow-hidden">
