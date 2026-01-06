@@ -33,7 +33,7 @@ export default function UFOItem({ label, onClick }: UFOItemProps) {
 
         {/* Saucer Body */}
         <div
-          className="relative z-30 h-[60px] w-[200px] rounded-full transition-all duration-300"
+          className="relative z-30 h-[50px] w-[200px] rounded-full transition-all duration-300"
           style={{
             background: "linear-gradient(to bottom, #444, #222, #000)",
             boxShadow:

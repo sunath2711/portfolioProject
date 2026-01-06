@@ -17,12 +17,12 @@ const projects = [
   },
   {
     id: 2,
-    title: "Titan Base",
-    tag: "Infrastructure",
-    desc: "Automated terraforming pipelines for icy moons. This system manages thermal regulators and oxygen scrubbers via a resilient edge-computing mesh.",
-    tech: ["Go", "Terraform", "K8s", "Prometheus"],
-    features: ["Auto-healing Nodes", "Atmospheric Modeling", "Resource Allocation AI"],
-    links: { github: "#", live: "#" }
+    title: "Cloud-Native Pipeline",
+    tag: "CICD",
+    desc: "An end-to-end, production-ready CI/CD ecosystem that automates the lifecycle of a Spring Boot application from code push to Kubernetes deployment. It integrates automated quality gates, multi-stage container builds, and image security scanning to bridge the gap between development and enterprise-grade operations.",
+    tech: ["K8s", "Jenkins", "Docker", "Springboot"],
+    features: ["Event-Driven Automation", "Optimized Multi-Stage Builds", "Dynamic Kubernetes Rollouts","Security-First Pipeline","Real-Time Observability"],
+    links: { github: "https://github.com/sunath2711/ci-cd-springboot", live: "https://dev.to/sunath2711/building-an-end-to-end-cicd-pipeline-with-spring-boot-jenkins-kubernetes-security-scans-28e0"}
   },
   {
     id: 3,
@@ -40,7 +40,7 @@ const projects = [
     desc: "End-to-end quantum encryption for deep space communications, ensuring data integrity across light-year distances.",
     tech: ["Python", "Solidity", "C++", "OpenSSL"],
     features: ["Lattice-based Crypto", "Relativistic Sync", "Multi-Sig Verification"],
-    links: { github: "#", live: "#" }
+    links: { github: "https://github.com/sunath2711/ci-cd-springboot", live: "https://dev.to/sunath2711/building-an-end-to-end-cicd-pipeline-with-spring-boot-jenkins-kubernetes-security-scans-28e0" }
   },
   {
     id: 5,
@@ -62,8 +62,8 @@ export default function Projects() {
     <section id="projects" className="relative min-h-screen py-32 px-6 z-40 scroll-mt-20">
       {/* 1. SECTION HEADER */}
       <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} className="mb-20 text-center">
-        <h2 className="text-[10px] tracking-[1em] text-cyan-500 uppercase font-mono mb-4">
-          Project_Database // Sector_05
+        <h2 className="text-[13px] tracking-[1em] text-cyan-500 uppercase font-mono mb-4">
+          Project_Database // SITE_ENGINEER
         </h2>
         <h3 className="text-5xl font-bold text-white tracking-tighter md:text-6xl">
           MISSION_LOGS
@@ -129,22 +129,22 @@ export default function Projects() {
                     onClick={() => setSelectedId(null)}
                     className="mb-8 text-[10px] text-cyan-500 hover:text-white flex items-center gap-2 uppercase tracking-widest"
                   >
-                    ← Back_to_Orbit
+                    ← BACK_TO_STATION
                   </button>
 
-                  <h2 className="text-5xl md:text-7xl font-bold text-white uppercase tracking-tighter mb-4">
+                  <h2 className="text-3xl md:text-4xl font-bold text-white uppercase tracking-tighter mb-4">
                     {activeProject.title}
                   </h2>
-                  <p className="text-blue-100/70 text-lg leading-relaxed mb-8">
+                  <p className="text-blue-100/80 text-lg leading-relaxed mb-8 font-orbitron">
                     {activeProject.desc}
                   </p>
 
                   <div className="space-y-6">
                     <div>
-                      <h5 className="text-[10px] text-cyan-500 uppercase tracking-widest mb-3">Tech_Stack</h5>
+                      <h5 className="text-[20px] text-cyan-500 uppercase tracking-widest mb-3">Tech_Stack</h5>
                       <div className="flex flex-wrap gap-2">
                         {activeProject.tech.map(t => (
-                          <span key={t} className="px-3 py-1 bg-white/5 border border-white/10 text-[10px] text-white uppercase font-mono">
+                          <span key={t} className="px-3 py-1 bg-white/5 border border-white/10 text-[17px] text-white uppercase font-orbitron tracking-wider">
                             {t}
                           </span>
                         ))}
@@ -156,7 +156,7 @@ export default function Projects() {
                         <Github size={14} /> Repository
                       </a>
                       <a href={activeProject.links.live} className="flex items-center gap-2 border border-white/20 text-white px-6 py-3 text-xs font-bold uppercase tracking-widest hover:bg-white/10 transition-colors">
-                        <ExternalLink size={14} /> Launch_App
+                        <ExternalLink size={14} /> Blog
                       </a>
                     </div>
                   </div>
@@ -165,7 +165,7 @@ export default function Projects() {
                 {/* COLUMN 2: KEY_FEATURES (HUD Style) */}
                 <div className="bg-white/5 p-8 border-l border-cyan-500/20">
                   <h5 className="text-[10px] text-cyan-500 uppercase tracking-widest mb-8 flex items-center gap-2">
-                    <Layers size={12} /> Mission_Specifications
+                    <Layers size={12} /> Objectives
                   </h5>
                   
                   <div className="space-y-8">
@@ -176,7 +176,7 @@ export default function Projects() {
                         </div>
                         <div>
                           <p className="text-white font-bold uppercase text-xs tracking-wider mb-1">{feature}</p>
-                          <p className="text-[10px] text-blue-100/40 uppercase">Verified_Status: Active</p>
+                          <p className="text-[10px] text-blue-100/40 uppercase">CICD : Active</p>
                         </div>
                       </div>
                     ))}
