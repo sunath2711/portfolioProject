@@ -59,7 +59,7 @@ export default function Projects() {
   const activeProject = projects.find((p) => p.id === selectedId);
 
   return (
-    <section id="projects" className="relative min-h-screen py-32 px-6 z-40 scroll-mt-20">
+    <section id="projects" className="relative min-h-screen py-32 px-6 z-40 scroll-mt-2">
       {/* 1. SECTION HEADER */}
       <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} className="mb-20 text-center">
         <h2 className="text-[13px] tracking-[1em] text-cyan-500 uppercase font-mono mb-4">

@@ -5,7 +5,7 @@ import { User, Zap, GraduationCap, MapPin } from "lucide-react";
 
 export default function About() {
   return (
-    <section id="about" className="relative min-h-screen py-32 px-6 z-40">
+    <section id="about" className="relative min-h-screen py-32 px-6 z-40 scroll-mt-18">
       <div className="mx-auto max-w-5xl">
         {/* Header */}
         <div className="mb-16">

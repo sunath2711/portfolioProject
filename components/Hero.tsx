@@ -7,7 +7,7 @@ import UfoNav from "./UfoNav";
 
 export default function Hero() {
   return (
-    <section className="relative flex min-h-screen items-center justify-center px-6 overflow-hidden">
+    <section id="hero" className="relative flex min-h-screen items-center justify-center px-6 overflow-hidden">
       {/* Background stays deep in the stack */}
       <SpaceBackground />
       <UfoNav />

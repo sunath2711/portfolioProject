@@ -3,12 +3,14 @@ import Projects from "@/components/Projects";
 import Navbar from "@/components/Navbar";
 import About from "@/components/About";
 import Contact from "@/components/Contact";
+import Skills from "@/components/Skills";
 
 export default function Home() {
   return (
     <>
       <Hero />
       <About />
+      <Skills />
       <Projects />
       <Contact />
       

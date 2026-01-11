@@ -5,7 +5,7 @@ import { Send, Github, Linkedin, MessageCircle, Shield } from "lucide-react";
 
 export default function Contact() {
   return (
-    <section id="contact" className="relative min-h-screen py-32 px-6 z-40 flex items-center justify-center">
+    <section id="contact" className="relative min-h-screen py-32 px-6 z-40 scroll-mt-5 flex items-center justify-center">
       <div className="mx-auto max-w-4xl w-full">
         {/* SECTION HEADER */}
         <div className="text-center mb-12">
