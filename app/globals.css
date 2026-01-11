@@ -28,3 +28,11 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+@keyframes scan-slow {
+  0% { transform: translateY(0); opacity: 0; }
+  50% { opacity: 0.8; }
+  100% { transform: translateY(80px); opacity: 0; }
+}
+.animate-scan-slow {
+  animation: scan-slow 4s linear infinite;
+}

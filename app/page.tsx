@@ -1,11 +1,22 @@
+"use client";
 import Hero from "@/components/Hero";
 import Projects from "@/components/Projects";
 import Navbar from "@/components/Navbar";
 import About from "@/components/About";
 import Contact from "@/components/Contact";
 import Skills from "@/components/Skills";
+import { useEffect } from "react";
 
 export default function Home() {
+  useEffect(() => {
+    // Force scroll to top on page load/refresh
+    window.scrollTo(0, 0);
+    
+    // Backup: ensures it triggers even if the browser tries to auto-scroll
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+  }, []);
   return (
     <>
       <Hero />
