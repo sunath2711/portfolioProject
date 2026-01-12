@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import About from "@/components/About";
 import Contact from "@/components/Contact";
 import Skills from "@/components/Skills";
+import Professional from "@/components/Professional";
 import { useEffect } from "react";
 
 export default function Home() {
@@ -21,6 +22,7 @@ export default function Home() {
     <>
       <Hero />
       <About />
+      <Professional />
       <Skills />
       <Projects />
       <Contact />

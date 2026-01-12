@@ -1,6 +1,12 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
+// Example for your layout.tsx or a separate font config file
+import { Orbitron, Rajdhani, JetBrains_Mono } from "next/font/google";
+
+const orbitron = Orbitron({ subsets: ["latin"], variable: "--font-orbitron" });
+const rajdhani = Rajdhani({ weight: ["400", "700"], subsets: ["latin"], variable: "--font-rajdhani" });
+const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono" });
 
 export const metadata: Metadata = {
   title: "Sunath K — Engineering products, not just code",
