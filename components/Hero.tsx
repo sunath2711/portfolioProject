@@ -47,7 +47,7 @@ export default function Hero() {
             
             <div className="flex items-center gap-6 mb-8 border-b border-white/5 pb-8">
               <div className="h-65 w-80 border border-cyan-500/30 p-1 relative overflow-hidden">
-                <Image src="/profile.jpeg" alt="Sunath" fill className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
+                <Image src="/profile1.jpeg" alt="Sunath" fill className="object-cover grayscale-75 group-hover:grayscale-0 transition-all duration-700" />
                 <div className="absolute inset-0 bg-cyan-500/10 pointer-events-none" />
                 <div className="absolute top-0 left-0 w-full h-[1px] bg-cyan-400 shadow-[0_0_10px_cyan] animate-scan" />
               </div>
