@@ -90,7 +90,7 @@ function NavLink({ link }: { link: { name: string; href: string } }) {
       href={link.href}
       whileHover={{ color: "#22d3ee", scale: 1.05 }}
       /* CHANGED: font-orbitron added, and tracking increased */
-      className="relative text-[10px] font-bold uppercase tracking-[0.25em] text-blue-100/90 transition-colors font-orbitron"
+      className="relative text-[13px] font-bold uppercase tracking-[0.25em] text-blue-100/90 transition-colors font-orbitron"
     >
       {link.name}
       <motion.span

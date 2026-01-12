@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import SpaceBackground from "./SpaceBackground";
-import { Zap, MapPin, Activity, GraduationCap, Code2, Cpu, Cloud, Brain } from "lucide-react";
+import { Zap, MapPin, Activity, GraduationCap, Code2, Cpu, Cloud, Brain, Container, Terminal, DatabaseIcon } from "lucide-react";
 
 export default function Hero() {
   const [uptime, setUptime] = useState("");
@@ -38,7 +38,7 @@ export default function Hero() {
         <motion.div 
           initial={{ opacity: 0, x: -30 }}
           animate={{ opacity: 1, x: 0 }}
-          className="lg:col-span-5"
+          className="lg:col-span-6 flex justify-center lg:justify-start pt-8"
         >
           <div className="relative border border-cyan-500/20 bg-blue-950/10 backdrop-blur-xl p-8 overflow-hidden group">
             {/* HUD Corner Accents */}
@@ -46,34 +46,36 @@ export default function Hero() {
             <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-cyan-500" />
             
             <div className="flex items-center gap-6 mb-8 border-b border-white/5 pb-8">
-              <div className="h-24 w-24 border border-cyan-500/30 p-1 relative overflow-hidden">
+              <div className="h-65 w-80 border border-cyan-500/30 p-1 relative overflow-hidden">
                 <Image src="/profile.jpeg" alt="Sunath" fill className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
                 <div className="absolute inset-0 bg-cyan-500/10 pointer-events-none" />
                 <div className="absolute top-0 left-0 w-full h-[1px] bg-cyan-400 shadow-[0_0_10px_cyan] animate-scan" />
               </div>
               <div>
-                <h2 className="text-2xl font-bold text-white font-orbitron tracking-tighter uppercase">Sunath Khadikar</h2>
-                <p className="text-cyan-400 font-mono text-[10px] tracking-[0.3em] mt-1 italic">SENIOR_ENGINEER // R&D</p>
+                <h2 className="text-3xl font-bold text-white font-orbitron tracking-tighter uppercase">Sunath Khadikar</h2>
+                <p className="text-cyan-400 font-mono text-[13px] tracking-[0.3em] mt-1">SENIOR_ENGINEER</p>
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-6 font-mono">
+            <div className="grid grid-cols-2 gap-5 font-mono">
               <div className="space-y-1">
-                <p className="text-[9px] text-white/30 uppercase">Origin</p>
-                <p className="text-xs text-white flex items-center gap-2"><MapPin size={12} className="text-cyan-500"/> INDIA</p>
+                <p className="text-[13px] text-white/70 uppercase">Origin</p>
+                <p className="text-l text-white flex items-center gap-2"><MapPin size={12} className="text-cyan-500"/> INDIA</p>
               </div>
               <div className="space-y-1">
-                <p className="text-[9px] text-white/30 uppercase">Uptime</p>
-                <p className="text-[10px] text-cyan-400 tabular-nums font-bold">{uptime || "SYNCING..."}</p>
+                <p className="text-[13px] text-white/70 uppercase">Specialty</p>
+                <p className="text-l text-white flex items-center gap-2"><Cpu size={12} className="text-cyan-500"/> DEVOPS / CLOUD / AI</p>
               </div>
               <div className="space-y-1">
-                <p className="text-[9px] text-white/30 uppercase">Specialty</p>
-                <p className="text-xs text-white flex items-center gap-2"><Cpu size={12} className="text-cyan-500"/> CLOUD/AI</p>
+                <p className="text-[13px] text-white/70 uppercase">Education</p>
+                <p className="text-l text-white flex items-center gap-2"><GraduationCap size={12} className="text-cyan-500"/> M.TECH CSE - IIIT Jabalpur</p>
               </div>
               <div className="space-y-1">
-                <p className="text-[9px] text-white/30 uppercase">Education</p>
-                <p className="text-xs text-white flex items-center gap-2"><GraduationCap size={12} className="text-cyan-500"/> M.TECH</p>
+                <p className="text-[13px] text-white/70 uppercase">Uptime</p>
+                <p className="text-l text-cyan-400 tabular-nums font-bold">{uptime || "SYNCING..."}</p>
               </div>
+              
+              
             </div>
           </div>
         </motion.div>
@@ -82,37 +84,43 @@ export default function Hero() {
         <motion.div 
           initial={{ opacity: 0, x: 30 }}
           animate={{ opacity: 1, x: 0 }}
-          className="lg:col-span-7 space-y-8"
+          className="lg:col-span-6 space-y-6"
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1 border border-cyan-500/30 bg-cyan-500/5 text-[10px] tracking-[0.4em] text-cyan-400 uppercase">
+          {/* <div className="inline-flex items-center gap-2 px-3 py-1 border border-cyan-500/30 bg-cyan-500/5 text-[10px] tracking-[0.4em] text-cyan-400 uppercase">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
             </span>
             System_Status: Operational
-          </div>
+          </div> */}
 
-          <h1 className="text-5xl md:text-7xl font-bold text-white tracking-tighter leading-none">
-            Architecting <br />
-            <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent italic">Intellectual Systems.</span>
+          <h1 className="text-5xl md:text-5xl font-bold text-white tracking-tighter leading-none pt-8">
+            Know the  
+            <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent italic"> Entity !!</span>
           </h1>
 
-          <p className="max-w-xl text-blue-100/60 text-lg leading-relaxed">
-            Software Engineer at <span className="text-white font-bold">Ericsson R&D</span>. 
-            I build high-performance distributed systems, focusing on the intersection of 
-            <span className="text-cyan-400"> Cloud Infrastructure</span> and <span className="text-cyan-400"> Applied AI</span>.
+          <p className="max-w-xl text-blue-100/90 text-xl leading-relaxed">
+          
+            An earthling who builds platforms that don’t break (most days) and pipelines that actually ship.<br></br>
+            <span className="text-cyan-400"> DevOps & Platform Engineer</span> with a <span className="text-white font-bold">Master’s in AI/ML</span> , blending CI/CD, Kubernetes, and software engineering to solve real production problems.
+            Actively building and learning how <span className="text-cyan-400"> AI & LLMs</span> can amplify automation, reliability, and the next generation of DevOps workflows.
+            
           </p>
 
           {/* Quick Tech Highlights */}
           <div className="flex flex-wrap gap-3">
             {[
-              { name: "Kubernetes", icon: Cloud },
-              { name: "DevOps", icon: Zap },
-              { name: "Java/Python", icon: Code2 },
-              { name: "MLOps", icon: Brain }
+              { name: "Docker", icon: Container },
+              { name: "Python", icon: Code2 },
+              { name: "Linux", icon: Terminal },
+              { name: "Kubernetes", icon: Cpu },
+              { name: "CI/CD", icon: Activity },
+              { name: "AWS", icon: Cloud },
+              { name: "NoSQL", icon: DatabaseIcon },
+              { name: "AI / ML", icon: Brain }
             ].map((tech) => (
-              <div key={tech.name} className="flex items-center gap-2 px-4 py-2 border border-white/10 bg-white/5 text-[11px] font-bold text-white tracking-widest uppercase hover:border-cyan-500/50 transition-colors">
-                <tech.icon size={14} className="text-cyan-500" /> {tech.name}
+              <div key={tech.name} className="flex items-center gap-2 px-4 py-2 border border-white/10 bg-white/5 text-[13px] font-bold text-white tracking-widest uppercase hover:border-cyan-500/50 transition-colors">
+                <tech.icon size={20} className="text-cyan-500" /> {tech.name}
               </div>
             ))}
           </div>
