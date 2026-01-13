@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import SpaceBackground from "./SpaceBackground";
-import { Zap, MapPin, Activity, GraduationCap, Code2, Cpu, Cloud, Brain, Container, Terminal, DatabaseIcon, Rocket, ChevronDown } from "lucide-react";
+import { Zap, MapPin, Activity, GraduationCap, Code2, Cpu, Cloud, Brain, Container, Terminal, DatabaseIcon, Rocket, ChevronDown, Sparkles } from "lucide-react";
 
 export default function Hero() {
   const [uptime, setUptime] = useState("");
@@ -89,12 +89,44 @@ export default function Hero() {
               <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent italic"> Entity !!</span>
             </h1>
 
-            <p className="max-w-xl text-blue-100/90 text-xl leading-relaxed">
-              An earthling who builds platforms that don’t break (most days) and pipelines that actually ship.<br></br>
-              <span className="text-cyan-400"> DevOps & Platform Engineer</span> with a <span className="text-white font-bold">Master’s in AI/ML</span> , blending CI/CD, Kubernetes, and software engineering to solve real production problems.
-              Actively building and learning how <span className="text-cyan-400"> AI & LLMs</span> can amplify automation, reliability, and the next generation of DevOps workflows. 
-            </p>
+            {/* UPDATED BULLET POINTS SECTION */}
+    <div className="space-y-4">
+      {[
+        { text: "Builds CI/CD production grade pipelines that actually ship.", highlight: "CI/CD" },
+        { text: "Structures platforms that don’t break [most days] 🛠️", highlight: "platforms" },
+        { text: "Knows his way around Cloud platforms.", highlight: "Cloud" },
+        { text: "Sleeps only once he cracks the problem.", highlight: "cracks the problem" },
+        { text: "Comfortable around LLMs, Agents and Machine Learning.", highlight: "LLMs, Agents" }
+      ].map((item, i) => (
+        <motion.div 
+          key={i}
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.2 + (i * 0.1) }}
+          className="flex items-start gap-3 group"
+        >
+          {/* STAR SHINING ICON */}
+          <div className="mt-1">
+            <div className="relative">
+              <Sparkles size={18} className="text-cyan-400 animate-pulse group-hover:scale-125 transition-transform" />
+              <div className="absolute inset-0 bg-cyan-400/40 blur-sm rounded-full scale-50 group-hover:scale-100 transition-all" />
+            </div>
           </div>
+          
+          <p className="text-blue-100/90 text-lg md:text-xl leading-snug">
+            {item.text.split(item.highlight).map((part, index, array) => (
+              <span key={index}>
+                {part}
+                {index < array.length - 1 && (
+                  <span className="text-cyan-400 font-medium">{item.highlight}</span>
+                )}
+              </span>
+            ))}
+          </p>
+        </motion.div>
+      ))}
+    </div>
+  </div>
 
           <div className="flex flex-wrap gap-3">
             {[
