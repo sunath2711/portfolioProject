@@ -46,7 +46,7 @@ export default function Hero() {
             
             <div className="flex items-center gap-6 mb-8 border-b border-white/5 pb-8">
               <div className="h-65 w-80 border border-cyan-500/30 p-1 relative overflow-hidden">
-                <Image src="/profile1.jpeg" alt="Sunath" fill className="object-cover grayscale-75 group-hover:grayscale-0 transition-all duration-700" />
+                <Image src="/profile.jpeg" alt="Sunath" fill className="object-cover grayscale-75 group-hover:grayscale-0 transition-all duration-700" />
                 <div className="absolute inset-0 bg-cyan-500/10 pointer-events-none" />
                 <div className="absolute top-0 left-0 w-full h-[1px] bg-cyan-400 shadow-[0_0_10px_cyan] animate-scan" />
               </div>
@@ -122,6 +122,7 @@ export default function Hero() {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
               className="group relative px-6 py-3 w-fit bg-cyan-500/10 border border-cyan-400 text-cyan-400 font-orbitron text-sm font-bold tracking-[0.2em] uppercase overflow-hidden transition-all shadow-[0_0_15px_rgba(6,182,212,0.25)] hover:shadow-[0_0_35px_rgba(6,182,212,0.5)] hover:text-white"
             >
               <div className="absolute inset-0 bg-cyan-400 translate-y-full group-hover:translate-y-0 transition-transform duration-300 -z-10" />
@@ -130,7 +131,7 @@ export default function Hero() {
                 Launch Projects
               </span>
               {/* Lightning streak effect */}
-              <div className="absolute top-0 -left-[100%] w-1/2 h-full bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-[-25deg] group-hover:left-[150%] transition-all duration-500" />
+              <div className="absolute top-0 -left-[100%] w-1/2 h-full bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-[-35deg] group-hover:left-[150%] transition-all duration-500" />
             </motion.button>
           </div>
         </motion.div>
