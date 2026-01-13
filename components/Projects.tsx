@@ -8,7 +8,7 @@ import { Globe, Github, ExternalLink, Cpu, Layers, ShieldCheck } from "lucide-re
 const projects = [
   {
     id: 1,
-    title: "Nebula OS",
+    title: "MLOps",
     tag: "System Design",
     desc: "A decentralized kernel designed for space-time compute distribution. It handles massive parallel tasks across distributed satellite nodes with zero latency.",
     tech: ["Rust", "Wasm", "Zig", "gRPC"],
@@ -26,7 +26,7 @@ const projects = [
   },
   {
     id: 3,
-    title: "StarLink UI",
+    title: "K8s Orchestration",
     tag: "Interface",
     desc: "Next-gen cockpit HUD for long-range explorers. Built with high-fidelity WebGL components to track orbital trajectories in real-time.",
     tech: ["React", "Three.js", "Framer", "GLSL"],
@@ -35,7 +35,7 @@ const projects = [
   },
   {
     id: 4,
-    title: "Void Crypt",
+    title: "AWS powered",
     tag: "Security",
     desc: "End-to-end quantum encryption for deep space communications, ensuring data integrity across light-year distances.",
     tech: ["Python", "Solidity", "C++", "OpenSSL"],
@@ -44,7 +44,7 @@ const projects = [
   },
   {
     id: 5,
-    title: "Pulse Radar",
+    title: "Buddy - Sentiment Chatbot",
     tag: "Analytics",
     desc: "Real-time asteroid tracking system using machine learning clusters to predict collision probabilities with 99.9% accuracy.",
     tech: ["PyTorch", "FastAPI", "React", "D3.js"],
