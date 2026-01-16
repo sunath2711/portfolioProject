@@ -9,7 +9,7 @@ const rajdhani = Rajdhani({ weight: ["400", "700"], subsets: ["latin"], variable
 const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono" });
 
 export const metadata: Metadata = {
-  title: "Sunath K — Engineering products, not just code",
+  title: "Sunath Khadikar - Engineering Solutions",
   description:
     "Portfolio of Sunath K, software engineer focused on building elegant, scalable and intelligent products.",
 };

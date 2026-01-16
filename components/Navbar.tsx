@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { Download, ChevronRight } from "lucide-react";
+import { Download } from "lucide-react";
 
 const navLinks = [
   { name: "Home", href: "#hero" },
@@ -14,18 +14,32 @@ const navLinks = [
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [isHidden, setIsHidden] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+
+    // Watch for project modal activation to hide navbar
+    const observer = new MutationObserver(() => {
+      setIsHidden(document.body.hasAttribute("data-modal-active"));
+    });
+
+    observer.observe(document.body, { attributes: true });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      observer.disconnect();
+    };
   }, []);
 
   return (
-    <nav className="fixed top-8 left-1/2 z-[100] -translate-x-1/2">
+    <nav 
+      className={`fixed top-8 left-1/2 z-[100] -translate-x-1/2 transition-all duration-500 ${
+        isHidden ? "opacity-0 pointer-events-none -translate-y-10" : "opacity-100 translate-y-0"
+      }`}
+    >
       <div className="relative flex items-center">
-        
-        {/* MAIN NAV PILL */}
         <motion.div
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -36,7 +50,6 @@ export default function Navbar() {
             ${scrolled ? "border-cyan-500/60 bg-blue-950/80 shadow-[0_0_20px_rgba(6,182,212,0.15)]" : ""}
           `}
         >
-          {/* THE SCANNER LIGHT */}
           <div className="relative w-12 h-2 border border-cyan-500/20 rounded-full overflow-hidden bg-black/20">
             <motion.div 
               animate={{ x: [-10, 40, -10] }}
@@ -52,14 +65,11 @@ export default function Navbar() {
           </div>
         </motion.div>
 
-        {/* HELIX RESUME MODULE */}
         <motion.div
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           className="absolute pl-4 left-full flex items-center lg:flex hidden"
         >
-          {/* <ChevronRight size={20} className="text-cyan-400/70 -mr-0.5" /> */}
-          
           <motion.a
             href="/resume.pdf"
             target="_blank"
@@ -73,7 +83,6 @@ export default function Navbar() {
             "
           >
             <Download size={13} className="text-cyan-400 group-hover:animate-bounce" />
-            {/* Using Orbitron for Resume as well */}
             <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-cyan-400 whitespace-nowrap font-orbitron">
               RESUME
             </span>
@@ -89,7 +98,6 @@ function NavLink({ link }: { link: { name: string; href: string } }) {
     <motion.a
       href={link.href}
       whileHover={{ color: "#22d3ee", scale: 1.05 }}
-      /* CHANGED: font-orbitron added, and tracking increased */
       className="relative text-[13px] font-bold uppercase tracking-[0.25em] text-blue-100/90 transition-colors font-orbitron"
     >
       {link.name}
