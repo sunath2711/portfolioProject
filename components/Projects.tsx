@@ -4,7 +4,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { 
   Github, Layers, ShieldCheck, 
-  Terminal, Activity, Zap, Cpu, X, FileText 
+  Terminal, Activity, Zap, Cpu, X, FileText, 
+  ChevronDown
 } from "lucide-react";
 
 const projects = [
@@ -83,7 +84,7 @@ export default function Projects() {
         <h3 className="text-4xl md:text-5xl font-bold text-white tracking-tighter uppercase font-orbitron">Mission_Logs</h3>
       </motion.div>
 
-      {/* ORIGINAL CLOSELY PACKED BENTO GRID */}
+      {/* TIGHTLY PACKED BENTO GRID */}
       <div className="w-full max-w-6xl grid grid-cols-1 md:grid-cols-12 gap-4 auto-rows-[220px]">
         {projects.map((project, index) => (
           <motion.div
@@ -93,25 +94,33 @@ export default function Projects() {
             className={`
               relative cursor-pointer group border border-white/10 bg-blue-950/20 backdrop-blur-md p-8 overflow-hidden
               ${index === 0 ? "md:col-span-8" : index === 1 ? "md:col-span-4" : index === 2 ? "md:col-span-4" : index === 3 ? "md:col-span-4" : "md:col-span-4"}
-              hover:border-cyan-400/50 transition-all duration-500 flex flex-col justify-end
+              hover:border-cyan-400/50 transition-all duration-500 flex flex-col justify-start
             `}
           >
+            {/* TOP LEFT: Project Title and Tag */}
+            <div className="z-10">
+              <p className="text-[10px] font-mono text-cyan-500 mb-1 uppercase tracking-[0.3em]">{project.tag}</p>
+              <h4 className="text-2xl md:text-3xl font-bold text-white uppercase font-orbitron tracking-tight group-hover:text-cyan-400 transition-colors">
+                {project.title}
+              </h4>
+            </div>
+
+            {/* Icon remains in top-right for visual balance */}
             <div className="absolute top-6 right-6 opacity-30 group-hover:opacity-100 group-hover:text-cyan-400 transition-all group-hover:scale-110">
               <project.icon size={28} />
             </div>
-            <p className="text-[10px] font-mono text-cyan-500 mb-1 uppercase tracking-[0.3em]">{project.tag}</p>
-            <h4 className="text-2xl md:text-3xl font-bold text-white uppercase font-orbitron tracking-tight group-hover:text-cyan-400 transition-colors">
-              {project.title}
-            </h4>
+
+            {/* Bottom Glow Line */}
             <div className="absolute bottom-0 left-0 h-[1px] w-0 bg-cyan-400 group-hover:w-full transition-all duration-700 shadow-[0_0_15px_cyan]" />
           </motion.div>
         ))}
+        
+        
       </div>
 
       <AnimatePresence>
         {selectedId && activeProject && (
           <div className="fixed inset-0 z-[110] flex items-center justify-center p-4">
-            {/* Click Outside to Close with transparent space background */}
             <motion.div 
               initial={{ opacity: 0 }} 
               animate={{ opacity: 1 }} 
@@ -124,7 +133,6 @@ export default function Projects() {
               layoutId={`card-${selectedId}`}
               className="relative w-full h-full md:h-[85vh] md:max-w-6xl bg-blue-950/40 border border-cyan-500/30 backdrop-blur-3xl flex flex-col overflow-hidden shadow-[0_0_50px_rgba(6,182,212,0.15)]"
             >
-              {/* SCANNER LINE ANIMATION */}
               <div className="absolute top-0 left-0 w-full h-[2px] bg-cyan-400/50 shadow-[0_0_15px_cyan] z-[60] animate-scan-slow pointer-events-none" />
 
               <button 
@@ -135,8 +143,6 @@ export default function Projects() {
               </button>
 
               <div className="flex-1 flex flex-col lg:grid lg:grid-cols-12 overflow-y-auto lg:overflow-hidden">
-                
-                {/* LEFT CONTENT: Description & Links */}
                 <div className="lg:col-span-7 p-8 md:p-12 lg:p-16 flex flex-col h-full">
                   <div className="flex-1">
                     <h2 className="text-3xl md:text-5xl font-bold text-white uppercase tracking-tighter font-orbitron mb-8">{activeProject.title}</h2>
@@ -145,7 +151,6 @@ export default function Projects() {
                     </p>
                   </div>
 
-                  {/* 2 COMPACT LINKS */}
                   <div className="mt-8 grid grid-cols-2 gap-4 max-w-md">
                     <a href={activeProject.links.github} target="_blank" className="flex items-center justify-center gap-3 py-4 px-6 border border-cyan-500/30 text-xs font-bold uppercase tracking-widest text-cyan-400 hover:bg-cyan-500/10 hover:border-cyan-400 transition-all font-orbitron">
                       <Github size={16} /> GitHub_Repo
@@ -156,9 +161,7 @@ export default function Projects() {
                   </div>
                 </div>
 
-                {/* RIGHT AREA: Features & Expanded Tech Inventory */}
                 <div className="lg:col-span-5 bg-cyan-500/5 p-8 md:p-12 border-t lg:border-t-0 lg:border-l border-cyan-500/20 h-full flex flex-col">
-                  
                   <div className="flex-1">
                     <h5 className="text-[10px] text-cyan-500 uppercase tracking-[0.3em] mb-10 flex items-center gap-2 font-mono font-bold">
                       <Layers size={14} /> Mission_Parameters
@@ -173,9 +176,8 @@ export default function Projects() {
                     </div>
                   </div>
 
-                  {/* TECH INVENTORY (Size increased 10%) */}
                   <div className="mt-12 pt-8 border-t border-cyan-500/10">
-                    <h5 className="text-[10px] text-cyan-500 uppercase tracking-widest mb-6 font-mono font-bold">TECH_ARSENAL</h5>
+                    <h5 className="text-[10px] text-cyan-500 uppercase tracking-widest mb-6 font-mono font-bold">TECH_INVENTORY</h5>
                     <div className="flex flex-wrap gap-3">
                       {activeProject.tech.map(t => (
                         <span key={t} className="px-5 py-2.5 bg-blue-950/40 border border-cyan-500/30 text-[13px] text-white uppercase font-mono tracking-wider shadow-[inset_0_0_10px_rgba(34,211,238,0.1)]">
@@ -185,7 +187,6 @@ export default function Projects() {
                     </div>
                   </div>
                 </div>
-
               </div>
             </motion.div>
           </div>
@@ -203,6 +204,23 @@ export default function Projects() {
           animation: scan-slow 6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
         }
       `}</style>
+      {/* SCROLL INDICATOR - Positioned more tightly to the content */}
+      <motion.div 
+        animate={{ y: [0, 10, 0] }}
+        transition={{ duration: 2, repeat: Infinity }}
+        className="relative mt-8 mb-8 flex flex-col items-center gap-2 cursor-pointer z-30"
+        onClick={() => document.getElementById('skills')?.scrollIntoView({ behavior: 'smooth' })}
+      >
+        <span className="text-[10px] font-mono text-cyan-500/60 uppercase tracking-[0.4em]">Penultimate_Sector</span>
+        <div className="w-6 h-10 border-2 border-cyan-500/30 rounded-full flex justify-center p-1">
+          <motion.div 
+            animate={{ y: [0, 16, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity }}
+            className="w-1.5 h-1.5 bg-cyan-400 rounded-full shadow-[0_0_8px_cyan]"
+          />
+        </div>
+        <ChevronDown size={16} className="text-cyan-500/40" />
+      </motion.div>
     </section>
   );
 }
