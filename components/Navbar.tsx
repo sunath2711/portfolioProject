@@ -24,8 +24,8 @@ export default function Navbar() {
     window.addEventListener("scroll", handleScroll);
 
     // Listen for the custom event dispatched by our useScrollSpy hook
-    const handleSectionChange = (e: unknown) => {
-      setActiveSection(e.detail);
+    const handleSectionChange = (e: Event) => {
+      setActiveSection((e as CustomEvent).detail);
     };
     window.addEventListener("sectionChange", handleSectionChange);
 
