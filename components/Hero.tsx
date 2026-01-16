@@ -4,10 +4,16 @@ import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import SpaceBackground from "./SpaceBackground";
-import { Zap, MapPin, Activity, GraduationCap, Code2, Cpu, Cloud, Brain, Container, Terminal, DatabaseIcon, Rocket, ChevronDown, Sparkles } from "lucide-react";
+import { useScrollSpy } from "@/hooks/useScrollSpy"; // IMPORT HOOK
+import { 
+  Zap, MapPin, Activity, GraduationCap, Code2, Cpu, Cloud, 
+  Brain, Container, Terminal, DatabaseIcon, Rocket, 
+  ChevronDown, Sparkles 
+} from "lucide-react";
 
 export default function Hero() {
   const [uptime, setUptime] = useState("");
+  const { scrollToSection } = useScrollSpy(); // USE HOOK
 
   useEffect(() => {
     const birthDate = new Date(1998, 10, 27, 21, 55, 0); 
@@ -89,44 +95,42 @@ export default function Hero() {
               <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent italic"> Entity !!</span>
             </h1>
 
-            {/* UPDATED BULLET POINTS SECTION */}
-    <div className="space-y-4">
-      {[
-        { text: "Builds CI/CD production grade pipelines that actually ship.", highlight: "CI/CD" },
-        { text: "Structures platforms that don’t break [most days] 🛠️", highlight: "platforms" },
-        { text: "Knows his way around Cloud platforms.", highlight: "Cloud" },
-        { text: "Sleeps only once he cracks the problem.", highlight: "cracks the problem" },
-        { text: "Comfortable around LLMs, Agents and Machine Learning.", highlight: "LLMs, Agents" }
-      ].map((item, i) => (
-        <motion.div 
-          key={i}
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.2 + (i * 0.1) }}
-          className="flex items-start gap-3 group"
-        >
-          {/* STAR SHINING ICON */}
-          <div className="mt-1">
-            <div className="relative">
-              <Sparkles size={18} className="text-cyan-400 animate-pulse group-hover:scale-125 transition-transform" />
-              <div className="absolute inset-0 bg-cyan-400/40 blur-sm rounded-full scale-50 group-hover:scale-100 transition-all" />
+            <div className="space-y-4">
+              {[
+                { text: "Builds CI/CD production grade pipelines that actually ship.", highlight: "CI/CD" },
+                { text: "Structures platforms that don’t break [most days] 🛠️", highlight: "platforms" },
+                { text: "Knows his way around Cloud platforms.", highlight: "Cloud" },
+                { text: "Sleeps only once he cracks the problem.", highlight: "cracks the problem" },
+                { text: "Comfortable around LLMs, Agents and Machine Learning.", highlight: "LLMs, Agents" }
+              ].map((item, i) => (
+                <motion.div 
+                  key={i}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.2 + (i * 0.1) }}
+                  className="flex items-start gap-3 group"
+                >
+                  <div className="mt-1">
+                    <div className="relative">
+                      <Sparkles size={18} className="text-cyan-400 animate-pulse group-hover:scale-125 transition-transform" />
+                      <div className="absolute inset-0 bg-cyan-400/40 blur-sm rounded-full scale-50 group-hover:scale-100 transition-all" />
+                    </div>
+                  </div>
+                  
+                  <p className="text-blue-100/90 text-lg md:text-xl leading-snug">
+                    {item.text.split(item.highlight).map((part, index, array) => (
+                      <span key={index}>
+                        {part}
+                        {index < array.length - 1 && (
+                          <span className="text-cyan-400 font-medium">{item.highlight}</span>
+                        )}
+                      </span>
+                    ))}
+                  </p>
+                </motion.div>
+              ))}
             </div>
           </div>
-          
-          <p className="text-blue-100/90 text-lg md:text-xl leading-snug">
-            {item.text.split(item.highlight).map((part, index, array) => (
-              <span key={index}>
-                {part}
-                {index < array.length - 1 && (
-                  <span className="text-cyan-400 font-medium">{item.highlight}</span>
-                )}
-              </span>
-            ))}
-          </p>
-        </motion.div>
-      ))}
-    </div>
-  </div>
 
           <div className="flex flex-wrap gap-3">
             {[
@@ -149,12 +153,11 @@ export default function Hero() {
             ))}
           </div>
 
-          {/* CENTERED PROJECTS BUTTON */}
           <div className="flex justify-center lg:justify-center pt-4">
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={() => scrollToSection('projects')} // UPDATED HANDLER
               className="group relative px-6 py-3 w-fit bg-cyan-500/10 border border-cyan-400 text-cyan-400 font-orbitron text-sm font-bold tracking-[0.2em] uppercase overflow-hidden transition-all shadow-[0_0_15px_rgba(6,182,212,0.25)] hover:shadow-[0_0_35px_rgba(6,182,212,0.5)] hover:text-white"
             >
               <div className="absolute inset-0 bg-cyan-400 translate-y-full group-hover:translate-y-0 transition-transform duration-300 -z-10" />
@@ -162,19 +165,17 @@ export default function Hero() {
                 <Rocket size={16} className="group-hover:animate-bounce" />
                 Launch Projects
               </span>
-              {/* Lightning streak effect */}
               <div className="absolute top-0 -left-[100%] w-1/2 h-full bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-[-35deg] group-hover:left-[150%] transition-all duration-500" />
             </motion.button>
           </div>
         </motion.div>
       </div>
 
-      {/* SPACE THEMED SCROLL INDICATOR */}
       <motion.div 
         animate={{ y: [0, 10, 0] }}
         transition={{ duration: 2, repeat: Infinity }}
         className="absolute bottom-10 flex flex-col items-center gap-2 cursor-pointer z-30"
-        onClick={() => document.getElementById('professional')?.scrollIntoView({ behavior: 'smooth' })}
+        onClick={() => scrollToSection('professional')} // UPDATED HANDLER
       >
         <span className="text-[10px] font-mono text-cyan-500/60 uppercase tracking-[0.4em]">Descent</span>
         <div className="w-6 h-10 border-2 border-cyan-500/30 rounded-full flex justify-center p-1">

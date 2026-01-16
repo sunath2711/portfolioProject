@@ -23,7 +23,13 @@ const skillCategories = [
 
 export default function Skills() {
   return (
-    <section id="skills" className="relative py-32 px-6 scroll-mt-32 overflow-hidden">
+    <section id="skills" className="relative py-32 px-6 overflow-hidden">
+      {/* ANCHOR OFFSET FIX: 
+         This invisible div sits above the section. When the Navbar link 
+         points to #skills, it hits this div instead of the section top.
+      */}
+      <div className="absolute -top-32 left-0 w-full h-1 pointer-events-none" id="skills-anchor" />
+      
       {/* BACKGROUND GLOW */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-cyan-500/5 rounded-full blur-[120px] pointer-events-none" />
 
@@ -32,6 +38,7 @@ export default function Skills() {
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
           className="mb-20 text-center"
         >
           <h2 className="text-[11px] font-mono tracking-[0.8em] text-cyan-500 uppercase mb-4">
@@ -52,13 +59,10 @@ export default function Skills() {
               transition={{ delay: i * 0.1, duration: 0.5 }}
               className="group relative"
             >
-              {/* TACTICAL CARD */}
               <div className="relative border border-white/10 bg-blue-950/20 backdrop-blur-md p-8 md:p-10 h-full transition-all duration-500 hover:border-cyan-500/40 hover:bg-blue-950/40 shadow-[inset_0_0_20px_rgba(0,0,0,0.2)]">
                 
-                {/* SCANNER LINE EFFECT */}
                 <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-1000" />
                 
-                {/* CATEGORY TITLE */}
                 <div className="flex items-center gap-5 mb-12">
                   <div className="p-3 bg-cyan-500/10 border border-cyan-500/20 rounded-lg group-hover:shadow-[0_0_15px_rgba(6,182,212,0.3)] transition-all">
                     <group.icon size={22} className="text-cyan-400" />
@@ -68,7 +72,6 @@ export default function Skills() {
                   </h3>
                 </div>
 
-                {/* SKILLS LISTING */}
                 <div className="space-y-5">
                   {group.skills.map((skill, index) => (
                     <motion.div 
@@ -83,7 +86,6 @@ export default function Skills() {
                         </span>
                       </div>
                       
-                      {/* STATUS BIT INDICATORS */}
                       <div className="flex gap-1 opacity-40 group-hover:opacity-100 transition-opacity">
                         <div className="h-1.5 w-1.5 bg-cyan-500 rounded-full animate-pulse" />
                         <div className={`h-1.5 w-1.5 rounded-full ${index % 2 === 0 ? 'bg-cyan-500' : 'bg-cyan-800'}`} />
@@ -92,7 +94,6 @@ export default function Skills() {
                   ))}
                 </div>
 
-                {/* DECORATIVE TERMINAL DATA */}
                 <div className="mt-12 pt-6 border-t border-white/5 flex justify-between font-mono text-[10px] text-cyan-500/40 uppercase tracking-[0.2em]">
                   <span>Ready_</span>
                   <span className="animate-pulse">Active_Node</span>
@@ -102,23 +103,26 @@ export default function Skills() {
           ))}
         </div>
       </div>
-      {/* SCROLL INDICATOR - Positioned more tightly to the content */}
-      <motion.div 
-        animate={{ y: [0, 10, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
-        className="relative mt-8 mb-8 flex flex-col items-center gap-2 cursor-pointer z-30"
-        onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-      >
-        <span className="text-[10px] font-mono text-cyan-500/60 uppercase tracking-[0.4em]">FINAL_Sector</span>
-        <div className="w-6 h-10 border-2 border-cyan-500/30 rounded-full flex justify-center p-1">
-          <motion.div 
-            animate={{ y: [0, 16, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
-            className="w-1.5 h-1.5 bg-cyan-400 rounded-full shadow-[0_0_8px_cyan]"
-          />
-        </div>
-        <ChevronDown size={16} className="text-cyan-500/40" />
-      </motion.div>
+
+      {/* CENTERED SCROLL INDICATOR */}
+      <div className="w-full flex justify-center mt-20 mb-8">
+        <motion.div 
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 2, repeat: Infinity }}
+          className="flex flex-col items-center gap-2 cursor-pointer z-30"
+          onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+        >
+          <span className="text-[10px] font-mono text-cyan-500/60 uppercase tracking-[0.4em]">FINAL_Sector</span>
+          <div className="w-6 h-10 border-2 border-cyan-500/30 rounded-full flex justify-center p-1 relative">
+            <motion.div 
+              animate={{ y: [0, 16, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+              className="w-1.5 h-1.5 bg-cyan-400 rounded-full shadow-[0_0_8px_cyan]"
+            />
+          </div>
+          <ChevronDown size={16} className="text-cyan-500/40" />
+        </motion.div>
+      </div>
     </section>
   );
 }

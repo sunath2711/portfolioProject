@@ -3,22 +3,31 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { Download } from "lucide-react";
+import { useScrollSpy } from "@/hooks/useScrollSpy"; // IMPORT HOOK
 
 const navLinks = [
-  { name: "Home", href: "#hero" },
-  { name: "Professional", href: "#professional" },
-  { name: "Projects", href: "#projects" },
-  { name: "Skills", href: "#skills" },
-  { name: "Contact", href: "#contact" },
+  { name: "Home", id: "hero" },
+  { name: "Professional", id: "professional" },
+  { name: "Projects", id: "projects" },
+  { name: "Skills", id: "skills" },
+  { name: "Contact", id: "contact" },
 ];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
+  const [activeSection, setActiveSection] = useState("hero"); // Track active section
+  const { scrollToSection } = useScrollSpy(); // USE HOOK
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
+
+    // Listen for the custom event dispatched by our useScrollSpy hook
+    const handleSectionChange = (e: unknown) => {
+      setActiveSection(e.detail);
+    };
+    window.addEventListener("sectionChange", handleSectionChange);
 
     // Watch for project modal activation to hide navbar
     const observer = new MutationObserver(() => {
@@ -29,6 +38,7 @@ export default function Navbar() {
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("sectionChange", handleSectionChange);
       observer.disconnect();
     };
   }, []);
@@ -50,6 +60,7 @@ export default function Navbar() {
             ${scrolled ? "border-cyan-500/60 bg-blue-950/80 shadow-[0_0_20px_rgba(6,182,212,0.15)]" : ""}
           `}
         >
+          {/* Status Indicator */}
           <div className="relative w-12 h-2 border border-cyan-500/20 rounded-full overflow-hidden bg-black/20">
             <motion.div 
               animate={{ x: [-10, 40, -10] }}
@@ -60,11 +71,30 @@ export default function Navbar() {
 
           <div className="flex items-center gap-8 px-2">
             {navLinks.map((link) => (
-              <NavLink key={link.name} link={link} />
+              <button
+                key={link.id}
+                onClick={() => scrollToSection(link.id)}
+                className={`
+                  relative text-[13px] font-bold uppercase tracking-[0.25em] transition-all duration-300 font-orbitron
+                  ${activeSection === link.id ? "text-cyan-400" : "text-blue-100/60 hover:text-blue-100"}
+                `}
+              >
+                {link.name}
+                
+                {/* PERSISTENT UNDERLINE FOR ACTIVE STATE */}
+                {activeSection === link.id && (
+                  <motion.span
+                    layoutId="activeNav"
+                    className="absolute -bottom-1 left-0 h-[1.5px] w-full bg-cyan-400 shadow-[0_0_8px_#22d3ee]"
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  />
+                )}
+              </button>
             ))}
           </div>
         </motion.div>
 
+        {/* Resume Button */}
         <motion.div
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
@@ -90,23 +120,5 @@ export default function Navbar() {
         </motion.div>
       </div>
     </nav>
-  );
-}
-
-function NavLink({ link }: { link: { name: string; href: string } }) {
-  return (
-    <motion.a
-      href={link.href}
-      whileHover={{ color: "#22d3ee", scale: 1.05 }}
-      className="relative text-[13px] font-bold uppercase tracking-[0.25em] text-blue-100/90 transition-colors font-orbitron"
-    >
-      {link.name}
-      <motion.span
-        className="absolute -bottom-1 left-0 h-[1.5px] bg-cyan-400 shadow-[0_0_8px_#22d3ee]"
-        initial={{ width: 0 }}
-        whileHover={{ width: "100%" }}
-        transition={{ duration: 0.2 }}
-      />
-    </motion.a>
   );
 }
