@@ -1,23 +1,24 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ChevronDown, Cpu, Globe, Zap } from "lucide-react";
+import { Brain, ChevronDown, Code, Cpu, Globe, Zap } from "lucide-react";
+import { platform } from "os";
 
 const skillCategories = [
   {
-    category: "Core_Engine",
-    icon: Cpu,
-    skills: ["React / Next.js", "TypeScript", "Node.js", "Python", "Rust", "C++"]
+    category: "CORE",
+    icon: Code,
+    skills: ["Python", "Django", "Algorithms", "System Design", "OOPS", "SQL/NoSQL", "Networking"]
   },
   {
     category: "Infrastructure",
     icon: Globe,
-    skills: ["Docker", "Kubernetes", "AWS / Vercel", "CI / CD", "Terraform", "Nginx"]
+    skills: ["Linux","Docker", "Kubernetes", "Helm", "Cloud ~ AWS", "CI / CD", "Jenkins", "Prometheus"]
   },
   {
-    category: "Neural_Net",
-    icon: Zap,
-    skills: ["PyTorch", "OpenAI API", "Vector DBs", "LLMs", "LangChain", "NLP"]
+    category: "AI / ML",
+    icon: Brain,
+    skills: ["Machine Learning", "PyTorch", "Agentic AI", "RAGs , Transformers", "LLMs", "LangChain", "NLP"]
   }
 ];
 
