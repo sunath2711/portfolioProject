@@ -24,7 +24,7 @@ export default function Navbar() {
     const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
 
-    const handleSectionChange = (e: unknown) => setActiveSection(e.detail);
+    const handleSectionChange = (e: Event) => setActiveSection((e as CustomEvent).detail);
     window.addEventListener("sectionChange", handleSectionChange);
 
     // Lock scroll for both Resume Preview and Mobile Menu
