@@ -70,15 +70,16 @@ const projects = [
 export default function Projects() {
   const [selectedId, setSelectedId] = useState<number | null>(null);
 
-  useEffect(() => {
-    if (selectedId) {
-      document.body.style.overflow = "hidden";
-      document.body.setAttribute("data-modal-active", "true");
-    } else {
-      document.body.style.overflow = "unset";
-      document.body.removeAttribute("data-modal-active");
-    }
-  }, [selectedId]);
+useEffect(() => {
+  if (selectedId) {
+    document.body.style.overflow = "hidden";
+    document.body.setAttribute("data-modal-active", "true");
+  } else {
+    document.body.style.overflow = "unset";
+    // Change removeAttribute to setAttribute false for the observer to catch it reliably
+    document.body.setAttribute("data-modal-active", "false"); 
+  }
+}, [selectedId]);
 
   const activeProject = projects.find((p) => p.id === selectedId);
 
